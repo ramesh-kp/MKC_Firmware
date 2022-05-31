@@ -40,4 +40,4 @@ Modbus_Error_Message = "Exception Response(131, 3, SlaveFailure)"
 Connection_Error_Message = "EIC"
 Connection_Checking_Count = 0
 
-Log_File = "newfile.log"
+Log_File = "MKC_Firmware/newfile.log"
