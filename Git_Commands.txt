@@ -7,7 +7,7 @@ git status
 git add .
     Add the files in your new local repository. This stages them for the first commit.
 
-git commit -m "check"
+git commit -m "added git token"
     Commit the files that you have staged in your local repository.
 
 git status
@@ -21,3 +21,6 @@ git push main master
 
 git pull https://github.com/ramesh-kp/MKC_Firmware.git
     The code from the remote repository is pulled to the local repository
+
+
+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
