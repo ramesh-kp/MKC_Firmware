@@ -20,20 +20,35 @@ Energymeter_Register_Counts = 46
 # Flowmeter_Start_Address = 1
 # Flowmeter_Register_Counts = 25
 
-# COD, BOD and TSS Sensor Configurations
-COD_BOD_TSS_Device_Id = 100
-COD_BOD_TSS_Start_Address = 9729
-COD_BOD_TSS_Register_Counts = 10
+# COD Configurations
+COD_Device_Id = 100
+COD_Start_Address = 9729
+COD_Register_Counts = 10
 
-# Turbidity Sensor Configurations
-Turbidity_Device_Id = 100
-Turbidity_Start_Address = 4609
-Turbidity_Register_Counts = 4
+# BOD Configurations
+BOD_Device_Id = 100
+BOD_Start_Address = 9729
+BOD_Register_Counts = 10
 
-# Ph Sensor Configurations
+# Temperature Configurations
+Temperature_Device_Id = 100
+Temperature_Start_Address = 9729
+Temperature_Register_Counts = 10
+
+# TSS Configurations
+TSS_Device_Id = 100
+TSS_Start_Address = 4608
+TSS_Register_Counts = 4
+
+# Ph Configurations
 Ph_Device_Id = 110
 Ph_Start_Address = 9729
 Ph_Register_Counts = 5
+
+# Pressure Configurations
+Pressure_Device_Id = 110
+Pressure_Start_Address = 9729
+Pressure_Register_Counts = 5
 
 # Error Configurations
 Modbus_Error_Message = "Exception Response(131, 3, SlaveFailure)"
@@ -41,4 +56,4 @@ Connection_Error_Message = "EIC"
 Connection_Checking_Count = 0
 
 # Log Configurations
-Log_File = "MKC_Firmware/newfile.log"
+Log_File = "newfile.log"

@@ -2,6 +2,7 @@ from pymodbus.client.sync import ModbusTcpClient
 from datetime import datetime
 import pytz
 import logging
+import struct
 
 from Configurations import Gateway_Ip_Address
 from Configurations import Gateway_Port
@@ -31,6 +32,16 @@ def Little_To_Big_Endian(data):
     t = bytearray.fromhex(data)
     t.reverse()
     return ''.join(format(x, '02x') for x in t).upper()
+
+# Convert Raw Data to Real Value
+
+
+def Parse_Raw_Data(Raw_Data, Array_Pos_1, Array_Pos_2):
+    List_1 = hex(Raw_Data[Array_Pos_1]).replace('0x', '').zfill(4)
+    List_2 = hex(Raw_Data[Array_Pos_2]).replace('0x', '').zfill(4)
+    First_Post_Hex = Little_To_Big_Endian(List_1 + List_2)
+    Reading = round(struct.unpack('!f', bytes.fromhex(First_Post_Hex))[0], 2)
+    return Reading
 
 
 # Write Log to Files

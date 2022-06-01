@@ -7,5 +7,3 @@ logging.basicConfig(filename="newfile.log",
                     level=logging.DEBUG)
 
 logging.info("Running Urban Planning")
-
-#logger = logging.getLogger('urbanGUI')

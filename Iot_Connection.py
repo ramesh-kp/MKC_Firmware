@@ -1,4 +1,3 @@
-# import time
 from azure.iot.device import IoTHubDeviceClient, Message
 
 from Configurations import Iot_Connection_String
@@ -17,7 +16,6 @@ def Iothub_Client_Telemetry_Sample_Run(reading):
         print("Sending message: {}".format(message))
         iothub_client.send_message(message)
         print("Message successfully sent")
-        # time.sleep(3)
 
     except KeyboardInterrupt:
         print("IoTHubClient sample stopped")

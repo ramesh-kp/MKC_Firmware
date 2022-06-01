@@ -1,5 +1,3 @@
-# import time
-
 from Common_Functions import Gateway_Connect
 from Configurations import Energymeter_Register_Counts, Energymeter_Start_Address, Energymeter_Device_Id, Modbus_Error_Message, Connection_Error_Message
 
@@ -12,11 +10,11 @@ def Energymeter_Reading():
     while True:
         Energymeter_Reading = Gateway_Connect().read_holding_registers(count=Energymeter_Register_Counts,
                                                                        address=Energymeter_Start_Address, unit=Energymeter_Device_Id)
-        # time.sleep(2)
         Energymeter_Reading_check = str(Energymeter_Reading)
         if Energymeter_Reading_check != Modbus_Error_Message:
-            raw_data = Energymeter_Reading.registers
-            return raw_data
+            energymeter_data = Parse_Raw_Data_Energymeter(
+                Energymeter_Reading.registers)
+            return energymeter_data
         else:
             print(Energymeter_Reading_check)
             Connection_Checking_Count = Connection_Checking_Count+1
