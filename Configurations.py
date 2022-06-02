@@ -45,10 +45,10 @@ Ph_Device_Id = 110
 Ph_Start_Address = 9729
 Ph_Register_Counts = 5
 
-# Pressure Configurations
-Pressure_Device_Id = 110
-Pressure_Start_Address = 9729
-Pressure_Register_Counts = 5
+# TDS Configurations
+TDS_Device_Id = 120
+TDS_Start_Address = 9729
+TDS_Register_Counts = 4
 
 # Error Configurations
 Modbus_Error_Message = "Exception Response(131, 3, SlaveFailure)"
@@ -57,3 +57,14 @@ Connection_Checking_Count = 0
 
 # Log Configurations
 Log_File = "newfile.log"
+
+# Device Configurations
+Pi_Id = "PI01"
+Router_Id = "RT01"
+Gateway_Id = "GW01"
+Device_Id = {"Pi_Id": Pi_Id, "Router_Id": Router_Id, "Gateway_Id": Gateway_Id}
+
+# MQTT Configurations
+Command_Type = "30"
+Topic = "MKCWIRAS"
+Variable_Header = format(len(Topic), "04x") + Topic

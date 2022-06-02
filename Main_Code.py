@@ -1,12 +1,15 @@
+from aiohttp import Payload
 from Energymeter_Checking import Energymeter_Reading
 from COD_Checking import COD_Reading
 from BOD_Checking import BOD_Reading
 from Temperature_Checking import Temperature_Reading
 from TSS_Checking import TSS_Reading
 from Ph_Checking import Ph_Reading
-from Pressure_Checking import Pressure_Reading
+from TDS_Checking import TDS_Reading
 from Simulated_Datas import Water_Level_Reading, Flowmeter_Reading
 from Common_Functions import Log_File_Messages, Local_Time
+from Iot_Connection import Iothub_Client_Telemetry_Sample_Run
+from Configurations import Device_Id, Variable_Header, Command_Type
 
 if __name__ == '__main__':
     print("<<< Waste Water Management >>>")
@@ -37,9 +40,9 @@ if __name__ == '__main__':
     ph = Ph_Reading()
     print(ph)
 
-    print("<<< Pressure Reading >>>")
-    pressure = Pressure_Reading()
-    print(pressure)
+    print("<<< TDS Reading >>>")
+    tds = TDS_Reading()
+    print(tds)
 
     print("<<< Water Level Reading >>>")
     water_level = Water_Level_Reading()
@@ -54,8 +57,12 @@ if __name__ == '__main__':
     print(time)
 
     print("<<< Complete Sensor Datas >>>")
-    sensor_data = str(time | energymeter | cod |
-                      bod | temperature | tss | ph | pressure | water_level | flowmeter)
-    print(sensor_data)
-    # # Iothub_Client_Telemetry_Sample_Run(sensor_data)
-    Log_File_Messages(sensor_data)
+    sensor_data = str(Device_Id | time | energymeter | cod |
+                      bod | temperature | tss | ph | tds | water_level | flowmeter)
+    MQTT_Message = Variable_Header + \
+        format(len(sensor_data), "04x") + sensor_data
+    Total_Length = format(len(MQTT_Message), "04x")
+    real_data = Command_Type + Total_Length + MQTT_Message
+
+    Iothub_Client_Telemetry_Sample_Run(real_data)
+    Log_File_Messages(real_data)

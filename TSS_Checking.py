@@ -12,7 +12,6 @@ def TSS_Reading():
                                                                address=TSS_Start_Address, unit=TSS_Device_Id)
         TSS_Reading_check = str(TSS_Reading)
         if TSS_Reading_check != Modbus_Error_Message:
-            print(TSS_Reading.registers)
             tss_data = Parse_Raw_Data(
                 TSS_Reading.registers, 0, 1)
             return {"TSS_Device_Id": TSS_Device_Id, "TSS_Data": tss_data}
