@@ -1,4 +1,3 @@
-from aiohttp import Payload
 from Energymeter_Checking import Energymeter_Reading
 from COD_Checking import COD_Reading
 from BOD_Checking import BOD_Reading

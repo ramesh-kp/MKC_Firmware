@@ -52,7 +52,11 @@ TDS_Register_Counts = 4
 
 # Error Configurations
 Modbus_Error_Message = "Exception Response(131, 3, SlaveFailure)"
-Connection_Error_Message = "EIC"
+Modbus_Error = {"Error_Message": "Error in Data"}
+Power_Error_Message = "Modbus Error: [Input/Output] Modbus Error: [Invalid Message] No response received, expected at least 8 bytes (0 received)"
+Power_Error = {"Error_Message": "Error in Coonection"}
+Ethernet_Network_Error = {"Error_Message": "Error in Ethernet Network"}
+Network_Connection_Error = {"Error_Message": "Error in Network Connection"}
 Connection_Checking_Count = 0
 
 # Log Configurations

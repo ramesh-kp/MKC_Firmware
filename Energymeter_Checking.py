@@ -1,5 +1,6 @@
 from Common_Functions import Gateway_Connect
-from Configurations import Energymeter_Register_Counts, Energymeter_Start_Address, Energymeter_Device_Id, Modbus_Error_Message, Connection_Error_Message
+from Configurations import Modbus_Error_Message, Modbus_Error, Power_Error_Message, Power_Error, Ethernet_Network_Error
+from Configurations import Energymeter_Register_Counts, Energymeter_Start_Address, Energymeter_Device_Id
 
 
 def Energymeter_Reading():
@@ -7,19 +8,25 @@ def Energymeter_Reading():
     Energymeter Reading
     """
     Connection_Checking_Count = 0
-    while True:
-        Energymeter_Reading = Gateway_Connect().read_holding_registers(count=Energymeter_Register_Counts,
-                                                                       address=Energymeter_Start_Address, unit=Energymeter_Device_Id)
-        Energymeter_Reading_check = str(Energymeter_Reading)
-        if Energymeter_Reading_check != Modbus_Error_Message:
-            energymeter_data = Parse_Raw_Data_Energymeter(
-                Energymeter_Reading.registers)
-            return energymeter_data
-        else:
-            print(Energymeter_Reading_check)
-            Connection_Checking_Count = Connection_Checking_Count+1
-            if Connection_Checking_Count == 10:
-                return Connection_Error_Message
+    try:
+        while True:
+            Energymeter_Reading = Gateway_Connect().read_holding_registers(count=Energymeter_Register_Counts,
+                                                                           address=Energymeter_Start_Address, unit=Energymeter_Device_Id)
+            Energymeter_Reading_check = str(Energymeter_Reading)
+            if Energymeter_Reading_check == Modbus_Error_Message:
+                Connection_Checking_Count = Connection_Checking_Count+1
+                if Connection_Checking_Count == 10:
+                    return Modbus_Error
+
+            elif Energymeter_Reading_check == Power_Error_Message:
+                return Power_Error
+
+            else:
+                energymeter_data = Parse_Raw_Data_Energymeter(
+                    Energymeter_Reading.registers)
+                return energymeter_data
+    except Exception as e:
+        return Ethernet_Network_Error
 
 
 def Parse_Raw_Data_Energymeter(Energymeter_Reading_Raw):
